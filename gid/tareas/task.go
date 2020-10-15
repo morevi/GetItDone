@@ -1,4 +1,4 @@
-package task
+package tareas
 
 type Task struct {
 	checked bool
