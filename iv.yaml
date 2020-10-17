@@ -1,1 +1,3 @@
-entidad: task.go
+entidad: 
+  - pkg/tareas/task.go
+  - pkg/tareas/taskList.go
