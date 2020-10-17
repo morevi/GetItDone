@@ -10,14 +10,16 @@ Personalmente, siempre me encuentro olvidando algunas de las cosas que tengo pen
  - Elegido el lenguaje.
  - [Issues](https://github.com/morevi/GetItDone/issues?closed=1) cerrados.
  - Creadas algunas historias de usuario.
- - [Hito 1](https://github.com/morevi/GetItDone/milestone/1?closed=1)
+ - Investigada y preparada una estructura básica para el proyecto.
+ - Creadas unas entidades básicas de las que partir.
+ - [Primer milestone](https://github.com/morevi/GetItDone/milestone/1?closed=1)
 
 ## Pasos a realizar.
  - Elección del resto de herramientas (Base de datos, sistema de logs, etc)
- - [Reenvio del Hito 1](https://github.com/morevi/GetItDone/milestone/1)
- - [Hito 2](https://github.com/morevi/GetItDone/milestone/2)
+ - [Preparar los test. Segundo milestone](https://github.com/morevi/GetItDone/milestone/2)
  - Completar algunas historias de usuario.
- - Seguir con los demás hitos, conforme avanza la asignatura.
+ - Seguir estudiando este lenguaje.
+ - Investigar bibliotecas o módulos útiles.
 
 ## Historias de usuario.
 Se ha creado la [etiqueta]() `user-stories` para poder visualizarlas de forma sencilla en la ventana de issues.
