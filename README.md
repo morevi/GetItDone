@@ -24,6 +24,9 @@ Personalmente, siempre me encuentro olvidando algunas de las cosas que tengo pen
 ## Historias de usuario.
 Puedes leer sobre ellas ![aquí](docs/hu.md).
 
+## Clases.
+Puedes leer sobre ellas ![aquí](docs/classes.md).
+
 ## Más información.
  - [El problema a resolver](docs/problemDescription.md)
  - [Configuración de `git`](docs/git.md)
