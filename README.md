@@ -1,7 +1,7 @@
 # GetItDone
 
 ## Descripción.
-El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, deadlines y prioridades. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
+El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
 
 ## ¿Por qué este proyecto?
 Personalmente, siempre me encuentro olvidando algunas de las cosas que tengo pendientes y termino recordandola el último día para realizarla de forma estresada. He elegido este proyecto porque pareció algo útil (aunque algo específico), y, con respecto al tema de la asignatura de Infraestructura Virtual de la UGR, me permite desarrollar un microservicio desplegable en la web, que sea de utilidad a alguna otra aplicación (es decir, el proyecto solo cubre el microservicio/API para su posible uso).
