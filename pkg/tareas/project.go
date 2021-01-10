@@ -7,3 +7,9 @@ type Project struct {
   Description string
   Items []Task
 }
+
+func (p *Project) New(tags []string, desc, todos []Task){
+  p.Tags = tags
+  p.Description = desc
+  p.Items = todos
+}
