@@ -20,9 +20,9 @@ func (t Task) toogleCheck() {
 }
 
 func (t Task) setContent(content string) {
-  t.content = content
+  t.Content = content
 }
 
 func (t Task) setDue(due time.Time) {
-  t.due = due
+  t.Due = due
 }
