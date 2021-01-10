@@ -1,3 +1,12 @@
 entidad: 
   - pkg/tareas/task.go
-  - pkg/tareas/taskList.go
+  - pkg/tareas/project.go
+
+lenguaje: go
+
+test:
+  - cmd/GetItDone/main_test.go
+  - pkg/tareas/task_test.go
+  - pkg/tareas/project_test.go
+
+taskfile: Makefile
