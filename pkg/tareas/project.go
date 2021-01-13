@@ -38,12 +38,12 @@ func(p *Project) GetAll() []Task {
   return p.Items
 }
 
-func(p *Project) GetDone(done bool) []Task {
-  var todos []Task
-  for _, t := range p.Items {
-    if t.Done == done {
-      todos = append(todos, t)
+func(p *Project) SearchByCompleted(done bool) []Task {
+  var tasks []Task
+  for _, i := range p.Items {
+    if i.Done == done {
+      tasks = append(tasks, t)
     }
   }
-  return todos
+  return tasks
 }
