@@ -26,7 +26,7 @@ func initializeProject() Project{
   return p
 }
 
-func eq(a []string, b []string) bool {
+func eqStringSlice(a []string, b []string) bool {
     if (a == nil) != (b == nil) {
         return false
     }
@@ -71,13 +71,31 @@ func TestSetDescription(t *testing.T) {
 }
 
 func TetSetTags(t *testing.T) {
-  t.Log("Test project test tags")
+  t.Log("Test project set tags")
   p := initializeProject()
 
   p.SetTags("a b c")
   want := []string{"a", "b", "c"}
 
-  if eq(p.Tags, want) {
-    t.Errorf(" setTags failed ")
+  if eqStringSlice(p.Tags, want) {
+    t.Errorf("setTags failed ")
+  }
+}
+
+func TestAddTask(t *testing.T) {
+  t.Log("Test project add task")
+  p := initializeProject()
+  var task Task
+  task.New(false, "test", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  want := append(p.Items, task)
+
+  p.AddTask(task)
+
+  if len(p.Items) != len(want) {
+    t.Log("Not same length")
+  }
+
+  if p.Items[2] != want[2] {
+    t.Log("Not same task")
   }
 }
