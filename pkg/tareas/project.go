@@ -40,8 +40,8 @@ func(p *Project) GetAll() []Task {
 
 func(p *Project) SearchByCompleted(done bool) []Task {
   var tasks []Task
-  for _, i := range p.Items {
-    if i.Done == done {
+  for _, t := range p.Items {
+    if t.Done == done {
       tasks = append(tasks, t)
     }
   }
