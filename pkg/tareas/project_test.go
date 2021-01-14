@@ -26,6 +26,21 @@ func initializeProject() Project{
   return p
 }
 
+func eq(a []string, b []string) bool {
+    if (a == nil) != (b == nil) {
+        return false
+    }
+    if len(a) != len(b) {
+        return false
+    }
+    for i := range a {
+        if a[i] != b[i] {
+            return false
+        }
+    }
+    return true
+}
+
 func TestProjectNew(t *testing.T) {
   t.Log("Test Project contructor")
   want := initializeProject()
@@ -55,3 +70,14 @@ func TestSetDescription(t *testing.T) {
   }
 }
 
+func TetSetTags(t *testing.T) {
+  t.Log("Test project test tags")
+  p := initializeProject()
+
+  p.SetTags("a b c")
+  want := []string{"a", "b", "c"}
+
+  if eq(p.Tags, want) {
+    t.Errorf(" setTags failed ")
+  }
+}
