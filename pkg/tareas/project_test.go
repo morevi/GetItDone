@@ -42,3 +42,16 @@ func TestProjectNew(t *testing.T) {
     t.Errorf("Test for Project.New() did not pass")
   }
 }
+
+func TestSetDescription(t *testing.T) {
+  t.Log("Test project set description")
+  want := "new project description"
+
+  p := initializeProject()
+  p.SetDescription(want)
+
+  if p.Description != want {
+    t.Errorf("received %s", p.Description)
+  }
+}
+
