@@ -7,6 +7,7 @@ import (
 )
 
 func TestNewTask(t *testing.T) {
+  t.Log("Test set task creation")
   done := false
   desc := "test string"
   due  := time.Now()
@@ -20,6 +21,7 @@ func TestNewTask(t *testing.T) {
 }
 
 func TestToogleCheck(t *testing.T) {
+  t.Log("Test set task checking")
   task := new(Task)
   task.New(false, "", time.Now())
 
@@ -27,5 +29,17 @@ func TestToogleCheck(t *testing.T) {
 
   if task.Done != true {
     t.Error("Task.ToogleCheck() did not pass")
+  }
+}
+
+func TestSetContent(t *testing.T) {
+  t.Log("Test set task content")
+  task := new(Task)
+  task.New(false, "", time.Now())
+
+  task.SetContent("new content")
+
+  if task.Content != "new content" {
+    t.Error("Task.SetContent() did not pass")
   }
 }
