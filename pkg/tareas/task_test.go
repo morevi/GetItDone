@@ -18,3 +18,14 @@ func TestNewTask(t *testing.T) {
     t.Error("Task.New() did not pass")
   }
 }
+
+func TestToogleCheck(t *testing.T) {
+  task := new(Task)
+  task.New(false, "", time.Now())
+
+  task.ToogleCheck()
+
+  if task.Done != true {
+    t.Error("Task.ToogleCheck() did not pass")
+  }
+}
