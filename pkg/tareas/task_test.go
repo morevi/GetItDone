@@ -43,3 +43,16 @@ func TestSetContent(t *testing.T) {
     t.Error("Task.SetContent() did not pass")
   }
 }
+
+func TestSetDue(t*testing.T) {
+  t.Log("Test set task due")
+  task := new(Task)
+  task.New(false, "", time.Now())
+
+  testDate := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
+  task.SetDue(testDate)
+
+  if task.Due != testDate {
+    t.Error("Task.SetDue() did not pass")
+  }
+}
