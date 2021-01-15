@@ -4,55 +4,61 @@ package tareas
 import (
   "testing"
   "time"
+  "reflect"
 )
 
 func TestNewTask(t *testing.T) {
-  t.Log("Test set task creation")
+  t.Log("Creates a new task")
   done := false
   desc := "test string"
   due  := time.Now()
 
-  task := new(Task)
-  task.New(done, desc, due)
+  var want Task
+  want.Done = done
+  want.Content = desc
+  want.Due = due
 
-  if task.Done != done || task.Content != desc || task.Due != due {
-    t.Error("Task.New() did not pass")
+  var got Task
+  got.New(done, desc, due)
+
+  if !reflect.DeepEqual(got, want) {
+    t.Errorf("\ngot : %+v\nwant: %+v\n", got, want)
   }
 }
 
 func TestToogleCheck(t *testing.T) {
-  t.Log("Test set task checking")
+  t.Log("Toggles completed field")
   task := new(Task)
   task.New(false, "", time.Now())
 
   task.ToogleCheck()
 
   if task.Done != true {
-    t.Error("Task.ToogleCheck() did not pass")
+    t.Errorf("\ngot : %+v\nwant: %+v\n", task.Done, true)
   }
 }
 
 func TestSetContent(t *testing.T) {
-  t.Log("Test set task content")
+  t.Log("Set content field in task")
   task := new(Task)
   task.New(false, "", time.Now())
 
   task.SetContent("new content")
 
   if task.Content != "new content" {
-    t.Error("Task.SetContent() did not pass")
+    t.Errorf("\ngot : %+v\nwant: %+v\n", task.Content, "new content")
   }
 }
 
 func TestSetDue(t*testing.T) {
-  t.Log("Test set task due")
+  t.Log("Set due field in task")
   task := new(Task)
   task.New(false, "", time.Now())
 
-  testDate := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
-  task.SetDue(testDate)
+  want := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
+  task.SetDue(want)
 
-  if task.Due != testDate {
-    t.Error("Task.SetDue() did not pass")
+  if task.Due != want {
+    t.Errorf("\ngot : %+v\nwant: %+v\n", task.Due, want)
   }
 }
