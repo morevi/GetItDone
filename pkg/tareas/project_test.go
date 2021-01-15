@@ -13,9 +13,9 @@ func initializeProject() Project{
   desc := "test description"
 
   var t1 Task
-  t1.New(false, "test task 1", time.Now().Add(24*time.Hour))
+  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
   var t2 Task
-  t2.New(false, "test task 2", time.Now().Add(48*time.Hour))
+  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
 
   todos := []Task{t1, t2}
 
@@ -27,18 +27,33 @@ func initializeProject() Project{
 }
 
 func eqStringSlice(a []string, b []string) bool {
-    if (a == nil) != (b == nil) {
-        return false
+  if (a == nil) != (b == nil) {
+    return false
+  }
+  if len(a) != len(b) {
+    return false
+  }
+  for i := range a {
+    if a[i] != b[i] {
+      return false
     }
-    if len(a) != len(b) {
-        return false
+  }
+  return true
+}
+
+func eqTaskSlice(a []Task, b []Task) bool {
+  if (a == nil) != (b == nil) {
+    return false
+  }
+  if len(a) != len(b) {
+    return false
+  }
+  for i := range a {
+    if a[i] != b[i] {
+      return false
     }
-    for i := range a {
-        if a[i] != b[i] {
-            return false
-        }
-    }
-    return true
+  }
+  return true
 }
 
 func TestProjectNew(t *testing.T) {
@@ -97,5 +112,58 @@ func TestAddTask(t *testing.T) {
 
   if p.Items[2] != want[2] {
     t.Log("Not same task")
+  }
+}
+
+func TestGet(t *testing.T) {
+  t.Log("Test Project.Get")
+  var want Task
+  want.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+
+  p := initializeProject()
+  got := p.Get(0)
+
+  if got != want {
+    t.Errorf("\ngot : %+v\nwant: %+v", got, want)
+  }
+}
+
+func TestGetAll(t *testing.T) {
+  t.Log("Test get all tasks in project")
+
+  var t1 Task
+  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  var t2 Task
+  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+
+  p := initializeProject()
+
+  want := []Task{t1, t2}
+  got  := p.GetAll()
+
+  if !eqTaskSlice(want, got) {
+    t.Errorf("\ngot : %+v\nwant: %+v", got, want)
+  }
+}
+
+func TestSearchByCompleted(t *testing.T) {
+  var t1 Task
+  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  var t2 Task
+  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+
+  want1 := []Task{t1, t2}
+  p   := initializeProject()
+  got1 := p.SearchByCompleted(false)
+
+  if !eqTaskSlice(got1, want1) {
+    t.Errorf("\ngot : %+v\nwant: %+v", got1, want1)
+  }
+
+  var want2 []Task
+  got2  := p.SearchByCompleted(true)
+
+  if !eqTaskSlice(got2, want2) {
+    t.Errorf("\ngot : %+v\nwant: %+v", got2, want2)
   }
 }
