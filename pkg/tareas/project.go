@@ -31,7 +31,13 @@ func (p *Project) AddTask(t Task) {
 }
 
 func (p *Project) Remove(tpos int){
-  p.Items = append(p.Items[:tpos], p.Items[tpos:]...)
+  nueva := make([]Task, 0)
+  for i, _ := range p.Items {
+    if i != tpos {
+      nueva = append(nueva, p.Items[i])
+    }
+  }
+  p.Items = nueva
 }
 
 func (p *Project) GetAll() []Task {
