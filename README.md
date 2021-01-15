@@ -8,7 +8,7 @@ Personalmente, siempre me encuentro olvidando algunas de las cosas que tengo pen
 
 ## Construcción
 Necesitas tener `go` y `make` instalados para compilar el proyecto.
-No necesitas instalar ninguna otra dependencia, `go` se engargara de todo.
+No necesitas instalar ninguna otra dependencia, `go` se engargara de traer las dependencias que no esten ya instaladas en el sistema.
 
 Si quieres obtener un ejecutable:
 ```
@@ -58,10 +58,11 @@ Representa una tarea o "todo", incluye una descripción, una fecha limite y su e
 Representa nuestra colección de tareas, incluye tags para organizarlos, una descripción y la serie de tareas que se le asignen. Es un paso hacia HU01, HU02 y HU04.
 
 ## Pasos a realizar.
- - [Preparar los test. Segundo milestone](https://github.com/morevi/GetItDone/milestone/2)
- - Completar las primeras historias de usuario.
- - Seguir estudiando este lenguaje.
- - Investigar bibliotecas o módulos útiles.
+ - Elegir un contenedor base para las pruebas.
+ - Crear un dockerfile
+ - Crear una clase `escritorio` desde la que gestionar los proyectos y sus tareas
+ - Terminar una historia de usuario.
+ - Seguir documentando issues. [Tercer milestone](https://github.com/morevi/GetItDone/milestone/3).
 
 ## Pasos realizados.
 Puedes leer sobre ellos ![aqui](docs/pasos.md).

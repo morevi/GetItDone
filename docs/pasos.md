@@ -13,5 +13,14 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/1)
 - Issues en el milestone.
 - Creada la clase `Task`.
 - Creada la clase `Project`.
-- Añadida páginas a la documentación: _pasos.md_, _hu.md_, _classes.md_.
 - Investigada y preparada una estructura básica para el proyecto.
+
+## Hito 2
+Su ![milestone](https://github.com/morevi/GetItDone/milestone/1)
+
+- Elegido `make` como herramienta de construcción.
+- Creados los tests para la clase `Task`.
+- Creados los tests para la clase `Project`.
+- Reorganizada la documentación.
+- Continuadas algunas historias de usuario.
+
