@@ -25,7 +25,7 @@ Para ejecutarlo puedes utilizar el ejecutable generado o puedes realizar:
 make run
 ```
 
-[Aqui](docs/tools.md) puedes leer porqué hemos elegido `make`
+[Aqui](docs/tools.md) puedes leer porqué hemos elegido `make`.
 
 ## Tests
 Para ejecutar todos los tests usamos:
@@ -35,10 +35,10 @@ make test
 
 Este comando ejecutará los tests de las clases *Project* y *Task*
 
-Puedes leer más sobre el entorno de test [aqui](docs/tools.md)
+Puedes leer más sobre el entorno de test [aquí](docs/tools.md).
 
 ## Historias de usuario
-Se ha creado la [etiqueta]() `user-stories` para poder visualizarlas de forma sencilla en la ventana de issues.
+Se ha creado la etiqueta `user-stories` para poder visualizarlas de forma sencilla en la ventana de issues.
 
 Cada issue del tipo `user-stories`, contiene un título conciso, y una frase de historia de usuario en la descripción.
 
