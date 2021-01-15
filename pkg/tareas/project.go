@@ -30,7 +30,7 @@ func (p *Project) AddTask(t Task) {
   p.Items = append(p.Items, t)
 }
 
-func (p *Project) RemoveTask(tpos int){
+func (p *Project) Remove(tpos int){
   p.Items = append(p.Items[:tpos], p.Items[tpos:]...)
 }
 

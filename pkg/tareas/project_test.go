@@ -115,6 +115,22 @@ func TestAddTask(t *testing.T) {
   }
 }
 
+func TestRemove(t *testing.T) {
+  var task Task
+  task.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+
+  want := []Task{task}
+
+  p := initializeProject()
+  p.Remove(1)
+  got := p.Items
+
+  if eqTaskSlice(got, want) {
+    t.Errorf("\ngot : %+v\nwant: %+v", got, want)
+  }
+
+}
+
 func TestGet(t *testing.T) {
   t.Log("Test Project.Get")
   var want Task
