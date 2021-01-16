@@ -10,3 +10,5 @@ test:
   - pkg/tareas/project_test.go
 
 taskfile: Makefile
+
+make: make
