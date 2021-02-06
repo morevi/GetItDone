@@ -80,63 +80,6 @@ Solo compararé las imágenes más eficientes.
 
 ![Comparación](docs/images/docker/full-comparison.png)
 
-## Construcción
-Necesitas tener `go`, `make`, y `git` instalados para poder compilar el proyecto.
-No es necesaria ninguna otra dependencia, `go` se encargará de traer las todo que necesite.
-
-Para ejecutar el programa sin compilar, puedes utilizar el siguiente comando:
-```
-make run
-```
-
-Pará obtener un ejecutable e instalarlo donde quieras:
-```
-make build
-```
-
-Si tienes $GOPATH en tu $PATH, puedes instalar directamente el binario con:
-```
-make install
-```
-
-[Aqui](docs/tools.md) puedes leer porqué hemos elegido `make`.
-
-## Tests
-Para ejecutar todos los tests usamos:
-```
-make test
-```
-Este comando ejecutará los tests de las clases *Project* y *Task*.
-
-También se pueden compilar los tests y ejecutarlos como programas independientes:
-```
-make build-test
-./GetItDone.test
-./tareas.test
-```
-
-Puedes leer más sobre el entorno de tests [aquí](docs/tools.md).
-
-## Historias de usuario
-Se ha creado la etiqueta `user-stories` para poder visualizarlas de forma sencilla en la ventana de issues.
-
-Cada issue del tipo `user-stories`, contiene un título conciso, y una frase de historia de usuario en la descripción de la misma.
-
-Aquí enlaces a cada una de las historias de usuario:
- - [HU01](https://github.com/morevi/GetItDone/issues/1) Información de las proyectos.
- - [HU02](https://github.com/morevi/GetItDone/issues/2) Gestión de proyectos.
- - [HU03](https://github.com/morevi/GetItDone/issues/3) Búsqueda y organización de proyectos.
- - [HU04](https://github.com/morevi/GetItDone/issues/4) Visualización del proyecto.
- - [HU05](https://github.com/morevi/GetItDone/issues/19) Información de la tarea.
- - [HU06](https://github.com/morevi/GetItDone/issues/5) Gestión de tareas.
-
-## Clases.
-### ![Task](pkg/tareas/task.go)
-Representa una tarea o *todo*, incluye una descripción, una fecha límite para completarla y un estado (completada o no). Su implementación es un paso adelante en la HU05 y la HU06.
-
-### ![Project](pkg/tareas/project.go)
-Representa una colección de tareas, incluye tags para organizarlos, una descripción y la serie de tareas que se le asignen. Es un paso hacia HU01, HU02 y HU04.
-
 ## Pasos a realizar.
  - Elegir un contenedor base para las pruebas.
  - Crear un dockerfile
@@ -149,6 +92,10 @@ Puedes leer sobre ellos ![aqui](docs/pasos.md).
 
 ## Más información.
  - [¿Por qué este proyecto?](docs/why.md)
+ - [Historias de usuario](docs/hu.md)
+ - [Clases](docs/classes.md)
+ - [Taskfile y builds](docs/builds.md)
+ - [Tests](docs/tests.md)
  - [El problema a resolver](docs/problemDescription.md)
  - [Configuración de `git`](docs/git.md)
  - [Herramientas](docs/tools.md)
