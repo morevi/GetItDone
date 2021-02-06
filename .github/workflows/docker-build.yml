@@ -8,7 +8,6 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: docker build
@@ -18,25 +17,29 @@ jobs:
         run: |
           docker run --rm morevi/getitdone
           
-  push-dockerhub:
+  pushdockerhub:
     runs-on: ubuntu-latest
     needs: build-test
+    steps:
       - name: docker login
         uses: docker/login-action@v1
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASS }}
-      - name: docker push
+      - name: docker push to DockerHub
         run: |
           docker push morevi/getitdone
           
-  push-ghcr:
+  pushghcr:
     runs-on: ubuntu-latest
     needs: build-test
-    
+    steps:
       - name: ghcr login
         uses: docker/login-action@v1 
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASS }}
           registry: ghcr.io
+      - name: docker push to Github Container Registry
+        run: |
+          docker push morevi/getitdone
