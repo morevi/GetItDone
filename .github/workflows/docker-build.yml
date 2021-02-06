@@ -23,4 +23,5 @@ jobs:
         run: |
           docker login -u morevi -p $DOCKER_PASS
       - name: docker push
+        run: |
           docker push morevi/getitdone
