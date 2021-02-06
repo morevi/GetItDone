@@ -11,6 +11,28 @@ En la mayoría de casos, una imagen oficial de un lenguaje, `golang`,será más 
 
 Por tanto, vamos a centrarnos en las imágenes oficiales de `golang`. La más reducida en tamaño podemos ver que son las basadas en Alpine, una distribución Linux que busca tener un tamaño mínimo. Para empezar a trabajar, esta será nuestra mejor opción.
 
+### El dockerfile.
+Resumidamente, se compilarán los tests en una imagen de `golang`, y luego se copiarán los binarios en una imagen `alpine`
+```
+# Usamos una imagen optimizada de go sobre alpine para que sea lo más ligera
+# posible durante la compilacion.
+FROM golang:1.15.7-alpine AS build
+WORKDIR /test
+COPY . .
+
+# Reutilizamos un unico RUN para evitar la creación de layers
+# Ademas, usamos --no-cache para que no se guarde la caché del manejador de paquetes. Aunque igualmente, al ser una máquina de construcción, no afectará a la máquina final.
+RUN \
+  apk update && apk add --no-cache git make \
+  && make build-test
+
+# Usamos una imagen mucho más ligera, alpine, para copiar los ejecutables en ella.
+# De esta forma será más rápido trabajar con ella, compartirla o subirla a las diferentes plataformas
+FROM alpine
+WORKDIR /test
+COPY --from=build /test .
+CMD ./GetItDone.test && ./tareas.test
+```
 ## Construcción
 Necesitas tener `go`, `make`, y `git` instalados para poder compilar el proyecto.
 No es necesaria ninguna otra dependencia, `go` se encargará de traer las todo que necesite.
