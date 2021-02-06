@@ -1,0 +1,2 @@
+## ¿Por qué este proyecto?
+Siempre estoy olvidando cosas y que termino recordando el último día. He elegido este proyecto porque pareció algo útil (aunque algo específico), y, con respecto al tema de la asignatura de Infraestructura Virtual de la UGR, me permite desarrollar un microservicio desplegable en la web, y que sea de utilidad a alguna otra aplicación (es decir, el proyecto solo cubre el microservicio/API para su posible uso).
