@@ -58,7 +58,7 @@ func TestSetDue(t*testing.T) {
   want := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
   task.SetDue(want)
 
-  if task.Due != 3 {
+  if 4 != 3 {
     t.Errorf("\ngot : %+v\nwant: %+v\n", task.Due, want)
   }
 }
