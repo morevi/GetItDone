@@ -34,6 +34,21 @@ WORKDIR /test
 COPY --from=build /test .
 CMD ./GetItDone.test && ./tareas.test
 ```
+### Automatización y Docker Hub.
+Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la construcción, testeo del proyecto y subida a Docker Hub.
+![docker-test](docs/images/docker/workflows.png)
+
+Este workflow se ejecutará en cualquier tipo de push (o pull).
+Las tareas se realizaran secuencialmente sobre la misma instancia de *ubuntu-latest*.
+
+Básicamente se realiza:
+1. Se sitúa sobre el proyecto y realiza el build.
+2. Luego ejecuta los test.
+3. Posteriormente realiza login en DockerHub usando las credenciales ofrecidas por github (username) o en secretos (password).
+4. Procede a publicar en DockerHub la imagen.
+
+Si cualquier paso da lugar a fallo, se indicará error tanto en el action como en el badge al inicio del README.md
+
 ### Optimización de la imagen.
 He optado por 3 medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
 - Uso de pocas directivas `COPY` y `RUN`:
