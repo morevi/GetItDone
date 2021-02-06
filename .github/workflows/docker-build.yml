@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-test-push:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +17,26 @@ jobs:
       - name: docker test
         run: |
           docker run --rm morevi/getitdone
+          
+  push-dockerhub:
+    runs-on: ubuntu-latest
+    needs: build-test
       - name: docker login
-        env:
-          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-        run: |
-          docker login -u morevi -p $DOCKER_PASS
+        uses: docker/login-action@v1
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKER_PASS }}
       - name: docker push
         run: |
           docker push morevi/getitdone
+          
+  push-ghcr:
+    runs-on: ubuntu-latest
+    needs: build-test
+    
+      - name: ghcr login
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKER_PASS }}
+          registry: ghcr.io
