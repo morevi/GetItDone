@@ -1,22 +1,26 @@
-
 name: Docker Build
-on: [push]
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-test-push:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - name: docker build
+        run: |
+          docker build . --tag morevi/getitdone
+      - name: docker test
+        run: |
+          docker run --rm morevi/getitdone
       - name: docker login
         env:
           DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
           docker login -u morevi -p $DOCKER_PASS
-      - name: docker build
-        run: |
-          docker build . --tag morevi/getitdone:tests
       - name: docker push
-        run: |
-          docker push morevi/getitdone:tests
-
+          docker push morevi/getitdone
