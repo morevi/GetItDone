@@ -36,5 +36,6 @@ jobs:
           registry: ghcr.io
       - name: docker push to ghcr
         run: |
-          docker push morevi/getitdone
+          docker tag morevi/getitdone ghcr.io/morevi/getitdone:latest
+          docker push ghcr.io/morevi/getitdone:latest
 
