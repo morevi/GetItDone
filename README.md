@@ -38,7 +38,7 @@ CMD ./GetItDone.test && ./tareas.test
 Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la construcción, testeo del proyecto y subida a Docker Hub.
 ![docker-test](docs/images/docker/workflows.png)
 
-Este workflow se ejecutará en cualquier tipo de push (o pull).
+Este workflow se ejecutará en cualquier tipo de push (o pull), además es posible ejecutarlo manualmente desde la ventana de actions.
 Las tareas se realizaran secuencialmente sobre la misma instancia de *ubuntu-latest*.
 
 Básicamente se realiza:
