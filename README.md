@@ -3,8 +3,13 @@
 ## Descripción.
 El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
 
-## ¿Por qué este proyecto?
-Siempre estoy olvidando cosas y que termino recordando el último día. He elegido este proyecto porque pareció algo útil (aunque algo específico), y, con respecto al tema de la asignatura de Infraestructura Virtual de la UGR, me permite desarrollar un microservicio desplegable en la web, y que sea de utilidad a alguna otra aplicación (es decir, el proyecto solo cubre el microservicio/API para su posible uso).
+## DOCKER
+Para facilitar la automatización de los tests, se va a crear una imagen de docker, de forma que se pueda lanzar tanto en local como en diferentes servicios y que el resultado sea siempre el mismo.
+
+### Contenedor base.
+En la mayoría de casos, una imagen oficial de un lenguaje, `golang`,será más eficiente en cuanto a velocidad como en peso que una imagen de uso genérico como podría ser la de `ubuntu` con *go* instalado. 
+
+Por tanto, vamos a centrarnos en las imágenes oficiales de `golang`. La más reducida en tamaño podemos ver que son las basadas en Alpine, una distribución Linux que busca tener un tamaño mínimo. Para empezar a trabajar, esta será nuestra mejor opción.
 
 ## Construcción
 Necesitas tener `go`, `make`, y `git` instalados para poder compilar el proyecto.
@@ -32,8 +37,15 @@ Para ejecutar todos los tests usamos:
 ```
 make test
 ```
-
 Este comando ejecutará los tests de las clases *Project* y *Task*.
+
+También se pueden compilar los tests y ejecutarlos como programas independientes:
+```
+make build-test
+./GetItDone.test
+./tareas.test
+```
+
 Puedes leer más sobre el entorno de tests [aquí](docs/tools.md).
 
 ## Historias de usuario
@@ -67,6 +79,7 @@ Representa una colección de tareas, incluye tags para organizarlos, una descrip
 Puedes leer sobre ellos ![aqui](docs/pasos.md).
 
 ## Más información.
+ - [¿Por qué este proyecto?](docs/why.md)
  - [El problema a resolver](docs/problemDescription.md)
  - [Configuración de `git`](docs/git.md)
  - [Herramientas](docs/tools.md)
