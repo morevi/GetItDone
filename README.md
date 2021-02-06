@@ -1,4 +1,5 @@
 # GetItDone
+![Docker Build](https://github.com/morevi/GetItDone/workflows/Docker%20Build/badge.svg?branch=master)
 
 ## Descripción.
 El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
