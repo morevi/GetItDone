@@ -14,5 +14,5 @@ RUN \
 # Y sea más rápido trabajar con ella, compartirla o subirla a las diferentes plataformas
 FROM alpine
 WORKDIR /test
-COPY --from=build /test /test
+COPY --from=build /test .
 CMD ./GetItDone.test && ./tareas.test
