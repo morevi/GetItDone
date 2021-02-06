@@ -53,7 +53,7 @@ func TestSetContent(t *testing.T) {
 func TestSetDue(t*testing.T) {
   t.Log("Set due field in task")
   task := new(Task)
-  task.New(false, "", time.Now())
+  task.New(false, "", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
 
   want := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
   task.SetDue(want)
