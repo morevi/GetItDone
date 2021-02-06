@@ -49,6 +49,18 @@ Básicamente se realiza:
 
 Si cualquier paso da lugar a fallo, se indicará error tanto en el action como en el badge al inicio del README.md
 
+### Registros de contenedores.
+#### Docker Hub
+Es un servicio con una documentación mucho más extensa, y al estar directamenteofrecido por Docker, la compatibilidad es inmediata, sin más configuración que la creación de una cuenta y un repositorio.
+
+Los repositorios en DockerHub tienen el requisito de que deben estar nombrados en minúscula, así que para probar que funciona, puedes hacer:
+```
+docker run -t -v `pwd`:/test nick-estudiante/nombre-del-repo
+```
+
+#### Github Docker Registry
+La documentación no es suficientemente amplia como para ser útil en la resolución de dudas. Además, es un servicio que aún está en beta, lo que supone que esta sujeto a posibles cambios, que hace más dícil de mantener el workflow.
+
 ### Optimización de la imagen.
 He optado por 3 medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
 - Uso de pocas directivas `COPY` y `RUN`:
