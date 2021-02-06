@@ -34,6 +34,25 @@ WORKDIR /test
 COPY --from=build /test .
 CMD ./GetItDone.test && ./tareas.test
 ```
+### Optimización de la imagen.
+He optado por 3 medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
+- Uso de pocas directivas `COPY` y `RUN`:
+Cada aparición de estas genera una nueva capa o 'layer' que docker utiliza para optimizar la construcción de futuras imágenes. Pero a cambio se incrementa es espacio que utilizan. Por tanto, reutilizaremos estas sentencias mediante el uso de *&&*.
+- Uso de `--no-cache`:
+Los 'package manager' utilizan una caché, para optimizar futuras instalaciones de paquetes. Como nuestra imagen no requiere a priori es autocontenida, y no requiere de más paquetes (aunque podría usarse de imagen base para otra imagen), esta opción nos va permitir ahorrar más MB.
+- Uso de *multi-stage* builds:
+Docker incluye una funcionalidad que permite usar una imagen, para generar otra. Es decir, podemos, en nuestro caso, usar la imagen de `golang:alpine` (300MB aproximadamente) para compilar nuestra API o los tests, y luego, copiar los binarios en una máquina mucho más ligera como `alpine:latest` (10MB aprox.). Esto permite tener una imágen extraordinariamente pequeña, perfecta para ser utilizada en producción, o en nuestro caso, para poder compartirla, subirla y descargarla rapidamente desde DockerHub.
+
+#### Comparación
+Solo compararé las imágenes más eficientes.
+
+| Base          | Optimización | Tamaño | Tiempo |
+| ------------- | ------------- | ------------ | ------------ |
+| Golang:alpine  | Pocas capas + --no-cache | 323 MB | 3.25 segundos |
+| Golang -> alpine| Pocas capas + --no-cache + multi-stage | 12.2 MB | 0.66 segundos |
+
+![Comparación](docs/images/docker/full-comparison.png)
+
 ## Construcción
 Necesitas tener `go`, `make`, y `git` instalados para poder compilar el proyecto.
 No es necesaria ninguna otra dependencia, `go` se encargará de traer las todo que necesite.
