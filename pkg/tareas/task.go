@@ -12,7 +12,7 @@ type Task struct {
 }
 
 func (t *Task) New(done bool, content string, due time.Time) {
-  t.Done = donetes
+  t.Done = done
   t.Content = content
   t.Due = due
 }
