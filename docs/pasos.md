@@ -16,7 +16,7 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/1)
 - Investigada y preparada una estructura básica para el proyecto.
 
 ## Hito 2
-Su ![milestone](https://github.com/morevi/GetItDone/milestone/1)
+Su ![milestone](https://github.com/morevi/GetItDone/milestone/2)
 
 - Elegido `make` como herramienta de construcción.
 - Creados los tests para la clase `Task`.
@@ -24,3 +24,7 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/1)
 - Reorganizada la documentación.
 - Continuadas algunas historias de usuario.
 
+## Hito 3
+Su ![milestone](https://github.com/morevi/GetItDone/milestone/4)
+- Elegidos golang:alpine para la construcción de ejecutables y alpine como base para su ejecución.
+- Creado el dockerfile
