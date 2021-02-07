@@ -2,95 +2,131 @@
 ![Docker Build](https://github.com/morevi/GetItDone/workflows/Docker%20Build/badge.svg?branch=master)
 
 ## Descripción.
-El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
+El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor, actuar de microservicio, y ser utilizada desde otras aplicaciones.
 
-## DOCKER
-Para facilitar la automatización de los tests, se va a crear una imagen de docker, de forma que se pueda lanzar tanto en local como en diferentes servicios y que el resultado sea siempre el mismo.
+## TESTS
+### Herramientas de construcción y tests
+- Construcción: `make`, es una herramienta flexible, independiente del lenguaje, permitirá simplificar las operaciones de construcción y mantenimiento del proyecto. Aunque `Go` viene con su propia herramienta de construcción, el uso de un Makefile permitirá simplificar los comandos, y reducirá nuestra carga al realizar operaciones de este tipo.
+- Test: El propio lenguaje `Go` aunque también es posible utilizar paquetes externos, incluye su propio entorno test. Vamos a utilizar este marco, ya que además de estar perfectamente integrado con el entorno de `go` (*go test*), ofrece algunas caracteríscicas bastante interesantes, como: 
+  
+  - La opción `-cover`, para generar un pequeño reporte donde podremos ver el porcentaje de código cubierto por los tests.
+  
+  - La opción `-c` para generar un ejecutable a partir de lost tests.
+  
+  - La ejecución de tests en parciales.
+  
+  - Paralelismo en la ejecución de tests.
+  
+  Para ejecutarlos hace falta crear un fichero *_test.go*, y luego realizar *go test* en el directorio con los ficheros *.go*. Los ficheros test deben estar en el mismo directorio que el fichero al que testean.
 
-### Contenedor base.
-En la mayoría de casos, una imagen oficial de un lenguaje, `golang`,será más eficiente en cuanto a velocidad como en peso que una imagen de uso genérico como podría ser la de `ubuntu` con *go* instalado. 
 
-Por tanto, vamos a centrarnos en las imágenes oficiales de `golang`. La más reducida en tamaño podemos ver que son las basadas en Alpine, una distribución Linux que busca tener un tamaño mínimo. Para empezar a trabajar, esta será nuestra mejor opción.
 
-### El dockerfile.
-Resumidamente, se compilarán los tests en una imagen de `golang`, y luego se copiarán los binarios en una imagen `alpine`
+### Construcción 
+
+Necesitas tener `go`, `make`, y `git`instalados para poder compilar el proyecto.
+No es necesaria ninguna otra dependencia, `go` se encargará de traer las todo que necesite usando `git`.
+Puedes ver el código del [Makefile](Makefile).
+
+Para ejecutar el programa sin compilar, puedes utilizar el siguiente comando:
+
 ```
-# Usamos una imagen optimizada de go sobre alpine para que sea lo más ligera
-# posible durante la compilacion.
-FROM golang:1.15.7-alpine AS build
-WORKDIR /test
-COPY . .
-
-# Reutilizamos un unico RUN para evitar la creación de layers
-# Ademas, usamos --no-cache para que no se guarde la caché del manejador de paquetes. Aunque igualmente, al ser una máquina de construcción, no afectará a la máquina final.
-RUN \
-  apk update && apk add --no-cache git make \
-  && make build-test
-
-# Usamos una imagen mucho más ligera, alpine, para copiar los ejecutables en ella.
-# De esta forma será más rápido trabajar con ella, compartirla o subirla a las diferentes plataformas
-FROM alpine
-WORKDIR /test
-COPY --from=build /test .
-CMD ./GetItDone.test && ./tareas.test
+make run
 ```
-### Automatización y Docker Hub.
-Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la construcción, testeo del proyecto y subida a Docker Hub.
-![docker-test](docs/images/docker/workflows.png)
+Pará obtener un ejecutable e instalarlo donde quieras:
 
-Este workflow se ejecutará en cualquier tipo de push (o pull), además es posible ejecutarlo manualmente desde la ventana de actions.
-Las tareas se realizaran secuencialmente sobre la misma instancia de *ubuntu-latest*.
-
-Básicamente se realiza:
-1. Se sitúa sobre el proyecto y realiza el build.
-2. Luego ejecuta los test.
-3. Posteriormente realiza login en DockerHub usando las credenciales ofrecidas por github (username) o en secretos (password).
-4. Procede a publicar en DockerHub la imagen.
-
-Si cualquier paso da lugar a fallo, se indicará error tanto en el action como en el badge al inicio del README.md
-
-### Registros de contenedores.
-#### Docker Hub
-Es un servicio con una documentación mucho más extensa, y al estar directamenteofrecido por Docker, la compatibilidad es inmediata, sin más configuración que la creación de una cuenta y un repositorio.
-
-Los repositorios en DockerHub tienen el requisito de que deben estar nombrados en minúscula, así que para probar que funciona, puedes hacer:
 ```
-docker run -t -v `pwd`:/test nick-estudiante/nombre-del-repo
+make build
+```
+Si tienes $GOPATH en tu $PATH, puedes instalar directamente el binario con:
+```
+make install
+```
+##### Makefile
+Este es la implementación del [Makefile](Makefile):
+
+```makefile
+# Generar un ejecutable
+build:
+		go build -o getitdone cmd/getitdone/main.go
+
+# Generar un ejecutable e instalarlo en 
+install:
+		go install ./...
+
+# Ejecutar el programa sin generar ejecutable
+run:
+		go run cmd/getitdone/main.go
+
+# Lanzar todos los tests
+test:
+		go test -cover ./...
+
+# Compilar los tests por paquetes
+build-test:
+		go test -c -cover ./cmd/getitdone
+		go test -c -cover ./pkg/tareas
+
 ```
 
-#### Github Docker Registry
-La documentación no es suficientemente amplia como para ser útil en la resolución de dudas. Además, es un servicio que aún está en beta, lo que supone que esta sujeto a posibles cambios, que hace más dícil de mantener el workflow.
 
-### Optimización de la imagen.
-He optado por 3 medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
-- Uso de pocas directivas `COPY` y `RUN`:
-Cada aparición de estas genera una nueva capa o 'layer' que docker utiliza para optimizar la construcción de futuras imágenes. Pero a cambio se incrementa es espacio que utilizan. Por tanto, reutilizaremos estas sentencias mediante el uso de *&&*.
-- Uso de `--no-cache`:
-Los 'package manager' utilizan una caché, para optimizar futuras instalaciones de paquetes. Como nuestra imagen no requiere a priori es autocontenida, y no requiere de más paquetes (aunque podría usarse de imagen base para otra imagen), esta opción nos va permitir ahorrar más MB.
-- Uso de *multi-stage* builds:
-Docker incluye una funcionalidad que permite usar una imagen, para generar otra. Es decir, podemos, en nuestro caso, usar la imagen de `golang:alpine` (300MB aproximadamente) para compilar nuestra API o los tests, y luego, copiar los binarios en una máquina mucho más ligera como `alpine:latest` (10MB aprox.). Esto permite tener una imágen extraordinariamente pequeña, perfecta para ser utilizada en producción, o en nuestro caso, para poder compartirla, subirla y descargarla rapidamente desde DockerHub.
 
-#### Comparación
-Solo compararé las imágenes más eficientes.
+### Ejecución de tests
 
-| Base          | Optimización | Tamaño | Tiempo |
-| ------------- | ------------- | ------------ | ------------ |
-| Golang:alpine  | Pocas capas + --no-cache | 323 MB | 3.25 segundos |
-| Golang -> alpine| Pocas capas + --no-cache + multi-stage | 12.2 MB | 0.66 segundos |
+Para ejecutar todos los tests usamos:
+```
+make test
+```
+Este comando ejecutará los tests de las clases *Project* y *Task*.
 
-![Comparación](docs/images/docker/full-comparison.png)
+También se pueden compilar los tests y ejecutarlos como programas independientes:
+```
+make build-test
+./GetItDone.test
+./tareas.test
+```
+![tests](docs/images/test.png)
+
+
+
+### Clases a testear
+
+#### Tarea/Task
+
+[Task](pkg/tareas/task.go)
+[Task tests](pkg/tareas/task_test.go)
+Representa una tarea o *todo*, incluye una descripción, una fecha límite para completarla y un estado (completada o no). Su implementación es un paso adelante en la HU05 y la HU06.
+
+#### Proyecto/Project
+
+[Project](pkg/tareas/project.go)
+[Project tests](pkg/tareas/project_test.go)
+Representa una colección de tareas, incluye tags para organizarlos, una descripción y la serie de tareas que se le asignen. Es un paso hacia HU01, HU02 y HU04. 
+
+#### Dashboard
+
+[Dashboard](pkg/tareas/dashboard.go)
+[Dashboard tests](pkg/tareas/dashboard_tests.go) (working on it)
+Representa el conjunto de los proyectos. Nos permitirá realizar búsquedas sobre los proyectos de forma más simplificada. Su implementación supone un avance hacia HU03 y HU04 
+
+
 
 ## Pasos a realizar.
- - Elegir un contenedor base para las pruebas.
- - Crear un dockerfile
- - Crear una clase `escritorio` desde la que gestionar los proyectos y sus tareas
+
+ - Acabar la clase `Dashboard` desde la que gestionar los proyectos y sus tareas
  - Terminar una historia de usuario.
- - Seguir documentando issues. [Tercer milestone](https://github.com/morevi/GetItDone/milestone/3).
+ - Seguir documentando issues. 
+ - Acabar [Tercer milestone](https://github.com/morevi/GetItDone/milestone/4).
+
+
 
 ## Pasos realizados.
-Puedes leer sobre ellos ![aqui](docs/pasos.md).
+
+Puedes leer sobre ellos [aquí](docs/pasos.md).
+
+
 
 ## Más información.
+
  - [¿Por qué este proyecto?](docs/why.md)
  - [Historias de usuario](docs/hu.md)
  - [Clases](docs/classes.md)
