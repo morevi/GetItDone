@@ -15,4 +15,4 @@ RUN \
 FROM alpine
 WORKDIR /test
 COPY --from=build /test .
-CMD ./GetItDone.test && ./tareas.test
+CMD ./getitdone.test && ./tareas.test
