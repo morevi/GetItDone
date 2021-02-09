@@ -1,17 +1,14 @@
 package tareas
 
 //Class TASK
-import (
-  "time"
-)
 
 type Task struct {
   Done bool
   Content string
-  Due time.Time
+  Due string
 }
 
-func (t *Task) New(done bool, content string, due time.Time) {
+func (t *Task) New(done bool, content string, due string) {
   t.Done = done
   t.Content = content
   t.Due = due
@@ -25,6 +22,6 @@ func (t *Task) SetContent(content string) {
   t.Content = content
 }
 
-func (t *Task) SetDue(due time.Time) {
+func (t *Task) SetDue(due string) {
   t.Due = due
 }

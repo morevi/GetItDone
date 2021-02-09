@@ -11,7 +11,7 @@ func TestNewTask(t *testing.T) {
   t.Log("Creates a new task")
   done := false
   desc := "test string"
-  due  := time.Now()
+  due  := string(time.Now().Format("2006-01-02"))
 
   var want Task
   want.Done = done
@@ -29,7 +29,7 @@ func TestNewTask(t *testing.T) {
 func TestToogleCheck(t *testing.T) {
   t.Log("Toggles completed field")
   task := new(Task)
-  task.New(false, "", time.Now())
+  task.New(false, "", string(time.Now().Format("2006-01-02")))
 
   task.ToogleCheck()
 
@@ -41,7 +41,7 @@ func TestToogleCheck(t *testing.T) {
 func TestSetContent(t *testing.T) {
   t.Log("Set content field in task")
   task := new(Task)
-  task.New(false, "", time.Now())
+  task.New(false, "", time.Now().Format("2006-01-02"))
 
   task.SetContent("new content")
 
@@ -53,9 +53,10 @@ func TestSetContent(t *testing.T) {
 func TestSetDue(t*testing.T) {
   t.Log("Set due field in task")
   task := new(Task)
-  task.New(false, "", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  date := time.Now().Format("2006-01-02")
+  task.New(false, "", date)
 
-  want := time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
+  want := time.Now().Format("2006-01-02")
   task.SetDue(want)
 
   if task.Due != want {

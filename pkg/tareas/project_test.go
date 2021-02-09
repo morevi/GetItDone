@@ -12,10 +12,12 @@ func initializeProject() Project{
   tags := []string{"proyecto", "iv", "test"}
   desc := "test description"
 
+  date := string(time.Now().Format("2006-01-14"))
+
   var t1 Task
-  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t1.New(false, "test task 1", date)
   var t2 Task
-  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t2.New(false, "test task 2", date)
 
   todos := []Task{t1, t2}
 
@@ -31,9 +33,9 @@ func TestProjectNew(t *testing.T) {
   want := initializeProject()
 
   var t1 Task
-  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t1.New(false, "test task 1", string(time.Now().Format("2006-01-14")))
   var t2 Task
-  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t2.New(false, "test task 2", string(time.Now().Format("2006-01-14")))
 
   var got Project
   got.New([]string{"proyecto", "iv", "test"}, "test description", []Task{t1, t2})
@@ -74,7 +76,7 @@ func TestAddTask(t *testing.T) {
   p := initializeProject()
 
   var task Task
-  task.New(false, "test", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  task.New(false, "test", string(time.Now().Format("2006-01-14")))
   want := append(p.Items, task)
 
   p.AddTask(task)
@@ -88,7 +90,7 @@ func TestAddTask(t *testing.T) {
 func TestRemove(t *testing.T) {
   t.Log("Removes a task from a project")
   var task Task
-  task.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  task.New(false, "test task 1", string(time.Now().Format("2006-01-14")))
 
   want := []Task{task}
 
@@ -104,7 +106,7 @@ func TestRemove(t *testing.T) {
 func TestGet(t *testing.T) {
   t.Log("Get a task from a project by pos in array")
   var want Task
-  want.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  want.New(false, "test task 1", string(time.Now().Format("2006-01-14")))
 
   p := initializeProject()
   got := p.Get(0)
@@ -118,9 +120,9 @@ func TestGetAll(t *testing.T) {
   t.Log("Gets all tasks from the project")
 
   var t1 Task
-  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
   var t2 Task
-  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t1.New(false, "test task 1", string(time.Now().Format("2006-01-14")))
+  t2.New(false, "test task 2", string(time.Now().Format("2006-01-14")))
 
   p := initializeProject()
 
@@ -136,9 +138,9 @@ func TestSearchByCompleted(t *testing.T) {
   t.Log("Get the task whose property Done is as given")
 
   var t1 Task
-  t1.New(false, "test task 1", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
   var t2 Task
-  t2.New(false, "test task 2", time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC))
+  t1.New(false, "test task 1", string(time.Now().Format("2006-01-14")))
+  t2.New(false, "test task 2", string(time.Now().Format("2006-01-14")))
 
   want1 := []Task{t1, t2}
   p   := initializeProject()
