@@ -28,3 +28,7 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/2)
 Su ![milestone](https://github.com/morevi/GetItDone/milestone/4)
 - Elegidos golang:alpine para la construcción de ejecutables y alpine como base para su ejecución.
 - Creado el dockerfile
+- Creada la clase Dashboard con sus tests.
+- Creado un Dockerfile
+- Creado el workflow para la realización de tests automaticos con github actions
+- Subida automática de contenedores a dockerhub.

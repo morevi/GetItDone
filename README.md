@@ -83,11 +83,9 @@ Solo compararé las imágenes más eficientes.
 ![Comparación](docs/images/docker/full-comparison.png)
 
 ## Pasos a realizar.
- - Elegir un contenedor base para las pruebas.
- - Crear un dockerfile
- - Crear una clase `escritorio` desde la que gestionar los proyectos y sus tareas
+ - Continuar por la sexta semana del curso.
+ - Comenzar el enrutamiento de la api.
  - Terminar una historia de usuario.
- - Seguir documentando issues. [Tercer milestone](https://github.com/morevi/GetItDone/milestone/3).
 
 ## Pasos realizados.
 Puedes leer sobre ellos ![aqui](docs/pasos.md).
