@@ -41,7 +41,6 @@ Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build
 Este workflow se ejecutará en cualquier tipo de push (o pull), además es posible ejecutarlo manualmente desde la ventana de actions.
 Las tareas se realizaran secuencialmente sobre la misma instancia de *ubuntu-latest*.
 
-[Aquí](https://hub.docker.com/repository/docker/morevi/getitdone) puedes ver el contenedor en el repositorio de DockerHub.
 
 Básicamente se realiza:
 1. Se sitúa sobre el proyecto y realiza el build.
@@ -57,8 +56,10 @@ Es un servicio con una documentación mucho más extensa, y al estar directament
 
 Los repositorios en DockerHub tienen el requisito de que deben estar nombrados en minúscula, así que para probar que funciona, puedes hacer:
 ```
-docker run -t -v `pwd`:/test nick-estudiante/nombre-del-repo
+docker run -t -v `pwd`:/test morevi/getitdone
 ```
+
+[Aquí](https://hub.docker.com/repository/docker/morevi/getitdone) puedes ver el contenedor en el repositorio de DockerHub.
 
 #### Github Docker Registry
 La documentación no es suficientemente amplia como para ser útil en la resolución de dudas. Además, es un servicio que aún está en beta, lo que supone que esta sujeto a posibles cambios, que hace más dícil de mantener el workflow.
