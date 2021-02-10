@@ -15,7 +15,7 @@ jobs:
           docker build . --tag morevi/getitdone
       - name: docker test
         run: |
-          docker run --rm morevi/getitdone
+          docker run -t -v `pwd`:/test morevi/getidone:latest 
           
       # DOCKER HUB
       - name: dockerhub login
