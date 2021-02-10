@@ -5,9 +5,10 @@ entidad:
 lenguaje: go
 
 test:
-  - cmd/GetItDone/main_test.go
+  - cmd/getitdone/main_test.go
   - pkg/tareas/task_test.go
   - pkg/tareas/project_test.go
+  - pkg/tareas/dashboard_test.go
 
 taskfile: Makefile
 
