@@ -17,7 +17,7 @@ Resumidamente, se compilarán los tests en una imagen de `golang`, y luego se co
 ```
 # Usamos una imagen optimizada de go sobre alpine para que sea lo más ligera
 # posible durante la compilacion.
-FROM golang:1.15.7-alpine AS build
+FROM golang:1.15.7-alpine
 WORKDIR /test
 COPY . .
 
@@ -25,14 +25,12 @@ COPY . .
 # Ademas, usamos --no-cache para que no se guarde la caché del manejador de paquetes. Aunque igualmente, al ser una máquina de construcción, no afectará a la máquina final.
 RUN \
   apk update && apk add --no-cache git make \
-  && make build-test
+  && addgroup -S go && adduser -S go -G go
 
-# Usamos una imagen mucho más ligera, alpine, para copiar los ejecutables en ella.
-# De esta forma será más rápido trabajar con ella, compartirla o subirla a las diferentes plataformas
-FROM alpine
-WORKDIR /test
-COPY --from=build /test .
-CMD ./GetItDone.test && ./tareas.test
+USER go
+
+CMD make test
+
 ```
 ### Automatización y Docker Hub.
 Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la construcción, testeo del proyecto y subida a Docker Hub.
@@ -65,21 +63,20 @@ docker run -t -v `pwd`:/test morevi/getitdone
 La documentación no es suficientemente amplia como para ser útil en la resolución de dudas. Además, es un servicio que aún está en beta, lo que supone que esta sujeto a posibles cambios, que hace más dícil de mantener el workflow.
 
 ### Optimización de la imagen.
-He optado por 3 medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
+Las medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
 - Uso de pocas directivas `COPY` y `RUN`:
 Cada aparición de estas genera una nueva capa o 'layer' que docker utiliza para optimizar la construcción de futuras imágenes. Pero a cambio se incrementa es espacio que utilizan. Por tanto, reutilizaremos estas sentencias mediante el uso de *&&*.
 - Uso de `--no-cache`:
 Los 'package manager' utilizan una caché, para optimizar futuras instalaciones de paquetes. Como nuestra imagen no requiere a priori es autocontenida, y no requiere de más paquetes (aunque podría usarse de imagen base para otra imagen), esta opción nos va permitir ahorrar más MB.
-- Uso de *multi-stage* builds:
-Docker incluye una funcionalidad que permite usar una imagen, para generar otra. Es decir, podemos, en nuestro caso, usar la imagen de `golang:alpine` (300MB aproximadamente) para compilar nuestra API o los tests, y luego, copiar los binarios en una máquina mucho más ligera como `alpine:latest` (10MB aprox.). Esto permite tener una imágen extraordinariamente pequeña, perfecta para ser utilizada en producción, o en nuestro caso, para poder compartirla, subirla y descargarla rapidamente desde DockerHub.
 
 #### Comparación
 Solo compararé las imágenes más eficientes.
 
 | Base          | Optimización | Tamaño | Tiempo |
 | ------------- | ------------- | ------------ | ------------ |
-| Golang:alpine  | Pocas capas + --no-cache | 323 MB | 3.25 segundos |
-| Golang -> alpine| Pocas capas + --no-cache + multi-stage | 12.2 MB | 0.66 segundos |
+| Golang:alpine  | Pocas capas + --no-cache | 314 MB | 3.25 segundos |
+| Golang:alpine  | Ninguna | 314 MB | 3.52 segundos |
+| Alpine con golang instalado | pocas capas + --nocache | 457MB | 3.51 segundos |
 
 ![Comparación](docs/images/docker/full-comparison.png)
 
