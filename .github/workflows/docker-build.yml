@@ -23,4 +23,4 @@ jobs:
           docker push morevi/getitdone:latest
       - name: docker test
         run: |
-          docker run -t -v `pwd`:/test morevi/getidone:latest 
+          docker run -t -v `pwd`:/test morevi/getitdone:latest 
