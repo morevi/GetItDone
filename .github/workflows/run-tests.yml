@@ -1,4 +1,3 @@
-# Call for CI systems that need to wait for the docker image
 on:
   workflow_run:
     workflows: "docker-build"
@@ -10,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        # Run tests on github actions too
+      - uses: actions/checkout@v2
       - name: run tests 
-        uses: actions/checkout@v2
         run: make docker-test
 
 
