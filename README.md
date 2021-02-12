@@ -1,7 +1,10 @@
 # GetItDone
 [![Actions](https://github.com/morevi/GetItDone/workflows/Docker%20Build/badge.svg?branch=master)](https://github.com/morevi/GetItDone/actions?query=workflow%3Adocker-build)
+
 [![Travis](https://travis-ci.com/morevi/GetItDone.svg?branch=master)](https://travis-ci.com/morevi/GetItDone)
-[![CircleCI](https://circleci.com/github/morevi/GetItDone.svg?style=svg)](https://app.circleci.com/pipelines/github/morevi/GetItDone?branch=circleci-project-setup)
+
+[![CircleCI](https://circleci.com/gh/morevi/GetItDone.svg?style=svg)](https://app.circleci.com/pipelines/github/morevi/GetItDone?branch=circleci-project-setup)
+
 ## Descripción.
 El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
 
