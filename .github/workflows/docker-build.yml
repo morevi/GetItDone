@@ -21,7 +21,7 @@ jobs:
       - name: docker build
         if: steps.check-files.output.changed
         run: |
-          docker build . --tag morevi/getitdone:latest
+          make docker-build
 
       - name: dockerhub login
         if: steps.check-files.output.changed
@@ -33,8 +33,4 @@ jobs:
       - name: docker push to dockerhub
         if: steps.check-files.output.changed
         run: |
-          docker push morevi/getitdone:latest
-
-      - name: docker test
-        run: |
-          docker run -t -v `pwd`:/test morevi/getitdone:latest 
+          make docker-push
