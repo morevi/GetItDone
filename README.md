@@ -8,6 +8,9 @@
 ## Descripción.
 El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, listas de tareas por etiquetas, y deadlines. De forma que puedas estar siempre organizado y productivo. Se podrá levantar en un servidor y pueda actuar de microservicio, y pueda ser utilizada desde otras aplicaciones.
 
+## Integración Continua
+Puedes leer sobre como qué sistemas, y como se han configurado [aquí](docs/ci.md)
+
 ## Pasos a realizar.
  - Continuar por la sexta semana del curso.
  - Comenzar el enrutamiento de la api.
