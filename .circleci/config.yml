@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: morevi/getitdone:latest
+
+    steps:
+      - checkout
+      - run: make test
