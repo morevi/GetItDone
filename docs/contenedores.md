@@ -7,24 +7,17 @@ En la mayoría de casos, una imagen oficial de un lenguaje, `golang`,será más 
 Por tanto, vamos a centrarnos en las imágenes oficiales de `golang`. La más reducida en tamaño podemos ver que son las basadas en Alpine, una distribución Linux que busca tener un tamaño mínimo. Para empezar a trabajar, esta será nuestra mejor opción.
 
 ### El dockerfile.
-Resumidamente, se compilarán los tests en una imagen de `golang`, y luego se copiarán los binarios en una imagen `alpine`
+Se crea la imagen a partir de `golang:1.15.7-alpine` y se configura el Dockerfile de forma que:
+- Utiliza pocas sentencias RUN para evitar capas.
+- Utiliza un nuevo usuario para ejecutar los tests sin privilegios,
+- Utiliza el taskfile para realizar las acciones.
 Échale un [vistazo](../Dockerfile)!
 
 ### Automatización y Docker Hub.
-Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la construcción, testeo del proyecto y subida a Docker Hub.
+Se ha creado [.github/workflows/docker-build.yml](.github/workflows/docker-build.yml), de forma que utilizaremos `github actions` para automátizar la **construcción**, testeo del proyecto y **subida a los registros**.
 ![docker-test](images/docker/workflows.png)
 
-Este workflow se ejecutará en cualquier tipo de push (o pull), además es posible ejecutarlo manualmente desde la ventana de actions.
-Las tareas se realizaran secuencialmente sobre la misma instancia de *ubuntu-latest*.
-
-
-Básicamente se realiza:
-1. Se sitúa sobre el proyecto y realiza el build.
-2. Luego ejecuta los test.
-3. Posteriormente realiza login en DockerHub usando las credenciales ofrecidas por github (username) o en secretos (password).
-4. Procede a publicar en DockerHub la imagen.
-
-Si cualquier paso da lugar a fallo, se indicará error tanto en el action como en el badge al inicio del README.md
+Este workflow se ejecutará en cualquier tipo de push (o pull) al repositorio, de forma que reconstruye la imagen si se ha modificado el Dockerfile y lo sube a los registros.
 
 ### Registros de contenedores.
 #### Docker Hub
@@ -39,6 +32,7 @@ docker run -t -v `pwd`:/test morevi/getitdone
 
 #### Github Docker Registry
 La documentación no es suficientemente amplia como para ser útil en la resolución de dudas. Además, es un servicio que aún está en beta, lo que supone que esta sujeto a posibles cambios, que hace más dícil de mantener el workflow.
+Se ha intentado.
 
 ### Optimización de la imagen.
 Las medidas para reducir el tamaño de la imagen final que se publicará en DockerHub:
