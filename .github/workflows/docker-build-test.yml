@@ -1,4 +1,4 @@
-name: docker-build
+name: docker-build-test
 
 on:
   push:
@@ -39,3 +39,12 @@ jobs:
       - name: docker push to dockerhub
         run: |
           make docker-push
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - name: run tests
+        run: |
+          make docker-test
