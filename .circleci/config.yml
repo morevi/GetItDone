@@ -2,8 +2,11 @@ version: 2
 jobs:
   build:
     docker:
+      # Coge nuestra imagen desde DockerHub
       - image: morevi/getitdone:latest
 
     steps:
+      # Se situa sobre nuestro código
       - checkout
+      # Ejecuta docker run
       - run: make test
