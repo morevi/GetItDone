@@ -1,10 +1,17 @@
 language: go
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION=1.27.4
 go:
   - tip
   - 1.15.8
 os:
   - linux
   - osx
+
+install:
+  - docker-compose build
 
 script:
   - make test
