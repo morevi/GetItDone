@@ -17,6 +17,10 @@ type Dashboard struct {
 // Initialize a empty dashboard
 func (d *Dashboard) New(id int) {}
 
+func (d *Dashboard) Get(pos int) Project {
+  return d.Projects[pos]
+}
+
 // Get all projects
 func (d *Dashboard) GetAll() []Project {
   var out []Project

@@ -20,6 +20,25 @@ func TestDashboardNew(t *testing.T) {
   }
 }
 
+func TestDashboardGet(t *testing.T) {
+  t.Log("Test Get All")
+  var d Dashboard
+  p1 := Project{[]string{"a", "b"}, "Description", []Task{}}
+  p2 := Project{[]string{"c", "d"}, "Description 2", []Task{}}
+  d.Add(p1)
+  d.Add(p2)
+
+  got := d.Get(0)
+  if !reflect.DeepEqual(got, p1) {
+    t.Errorf("Dashboard.Get\n want: %+v\n got: %+v", p1, got)
+  }
+
+  got = d.Get(1)
+  if !reflect.DeepEqual(got, p2) {
+    t.Errorf("Dashboard.Get\n want: %+v\n got: %+v", p2, got)
+  }
+}
+
 func TestDashboardGetAll(t *testing.T) {
   t.Log("Test Get All")
 
