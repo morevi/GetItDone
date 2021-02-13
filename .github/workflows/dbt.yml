@@ -1,4 +1,5 @@
-name: docker-build-test
+# (d)ocker (b)uild (t)est
+name: dbt
 
 on:
   push:
