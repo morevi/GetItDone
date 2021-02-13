@@ -6,12 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Comprueba si han habido cambios en el Dockerfile
   check:
     runs-on: ubuntu-latest
+    # Donde se almacena el resultado de la comprobación
     outputs:
       changed: ${{ steps.changes.outputs.container }}
     steps:
       - uses: actions/checkout@v2
+        # comprueba
       - uses: dorny/paths-filter@v2
         name: Comprobando Dockerfile
         id: changes
@@ -21,6 +24,8 @@ jobs:
               - 'Dockerfile'
 
   build:
+    # Construye la imagen si el resultado de la comprobacion 
+    # es 'true'
     runs-on: ubuntu-latest
     needs: check
     steps:
@@ -44,6 +49,7 @@ jobs:
           make docker-push
 
   test:
+    # Ejecuta los test usando la nueva imagen
     runs-on: ubuntu-latest
     needs: build
     steps:
