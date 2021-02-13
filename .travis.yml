@@ -1,10 +1,16 @@
+# Eleccion del lenguaje
 language: go
+
+# Eleccion de las versiones a probar
 go:
   - tip
   - 1.15.8
+
+# Eleccion de los sistemas operativos a probar
 os:
   - linux
   - osx
 
+# Ejecuta los tests
 script:
   - make test
