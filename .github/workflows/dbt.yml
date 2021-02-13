@@ -23,21 +23,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: check
-    if: needs.check.outputs.changed == 'true'
     steps:
       - uses: actions/checkout@v2
 
       - name: docker build
+        if: needs.check.outputs.changed == 'true'
         run: |
           make docker-build
 
       - name: dockerhub login
+        if: needs.check.outputs.changed == 'true'
         uses: docker/login-action@v1
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASS }}
 
       - name: docker push to dockerhub
+        if: needs.check.outputs.changed == 'true'
         run: |
           make docker-push
 
