@@ -7,15 +7,15 @@ Para los 3 sistemas de CI se utilizan badges para visualizar el estado del códi
 Es difícil organizar varios servicios de CI de forma que se esperen unos a otros, así que este sistema se encargará de realizar
 
 Se han configurado el workflow [docker-build-test](../github/workflows/docker-build-test.yml), que realiza 3 _jobs_:
-- `check`. Combrueba si han habido cambios en el Dockerfile.
+- `check`. Combrueba si han habido cambios en el Dockerfile
 - `build`. Si han habido cambios, reconstruye y sube la nueva imagen de docker; si no: no hace nada.
 - `test`. Espera a que acabe `build`, y ejecuta los tests en ese contenedor.
 ![actions-log](images/ci/actions-log.png)
 
 ## Travis
-Se ha [configurado](../.travis.yml) de forma que realizaremos tests con diferentes versiones de `Go` y en los sistemas operativos Linux y OSX de forma paralela.
-Se realizaran 2 tests: 2 versiones x 2 os.
-Para ello, no se utiliza nuestra imagen docker para los tests, si no que Travis utiliza las suyas para los SO y versiones indicados. Podemos ver en una captura que en cada ejecución de Travis, se realizan 4 pruebas.
+Se ha [configurado](../.travis.yml) de forma que realizaremos tests con diferentes versiones de `Go` y en los sistemas operativos Linux y OSX. 
+Se realizaran 6 tests: 3 versiones x 2 os.
+Para ello, no se utiliza nuestra imagen docker para los tests, si no que Travis utiliza las suyas para los SO y versiones indicados. Podemos ver en una captura que en cada ejecución de Travis, se realizan 6 pruebas.
 ![travis-log](images/ci/travis-log.png)
 
 ## Circle CI
