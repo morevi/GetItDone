@@ -4,7 +4,7 @@ Se han configurado GH Actions, Travis y CircleCI.
 Para los 3 sistemas de CI se utilizan badges para visualizar el estado del código desde el README.md.
 
 ## Actions
-Es difícil organizar varios servicios de CI de forma que se esperen unos a otros, así que este sistema se encargará de realizar
+Es difícil organizar varios servicios de CI de forma que se esperen unos a otros, así que el mismo sistema que construya la imagen de docker, tendrá que realizar una prueba de tests con ella, de forma que tengamos los resultados con la imagen actualizada, al menos de este CI.
 
 Se han configurado el workflow [docker-build-test](../github/workflows/docker-build-test.yml), que realiza 3 _jobs_:
 - `check`. Combrueba si han habido cambios en el Dockerfile
