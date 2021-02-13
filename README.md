@@ -9,7 +9,7 @@ El objetivo es crear una API que permita gestionar, mediante operaciones CRUD, l
 Puedes leer sobre como qué sistemas, y como se han configurado [aquí](docs/ci.md)
 
 ## Pasos a realizar.
- - Continuar por la sexta semana del curso.
+ - Continuar por la octava semana del curso.
  - Comenzar el enrutamiento de la api.
  - Terminar una historia de usuario.
 
@@ -20,6 +20,7 @@ Puedes leer sobre ellos ![aqui](docs/pasos.md).
  - [¿Por qué este proyecto?](docs/why.md)
  - [Historias de usuario](docs/hu.md)
  - [Clases](docs/classes.md)
+ - [Contenedores](docs/contenedores.md)
  - [Taskfile y builds](docs/builds.md)
  - [Tests](docs/tests.md)
  - [El problema a resolver](docs/problemDescription.md)

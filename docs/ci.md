@@ -15,7 +15,7 @@ Se han configurado el workflow [docker-build-test](../github/workflows/docker-bu
 ## Travis
 Se ha [configurado](../.travis.yml) de forma que realizaremos tests con diferentes versiones de `Go` y en los sistemas operativos Linux y OSX. 
 Se realizaran 2 tests: 2 versiones x 2 os.
-Las versiones que utilizamos es _tip_ (la última), y la _1.15.8_ que es la última en este momento, pero algun día dejará de serlo, y el proyecto seguirá programado con las carácteristicas de esta versión.
+Las versiones que utilizamos es _tip_ (la más reciente y actualizada en todo momento), y la _1.15.8_ que es la última en este momento, pero algun día dejará de serlo, y el proyecto seguirá programado con las carácteristicas de esta versión.
 Para ello, no se utiliza nuestra imagen docker para los tests, si no que Travis utiliza las suyas para los SO y versiones indicados. Podemos ver en una captura que en cada ejecución de Travis, se realizan 6 pruebas.
 ![travis-log](images/ci/travis-log.png)
 
@@ -27,7 +27,7 @@ Su configuración es [esta](../.circleci/config.yml). Podemos verlo funcionando:
 ![circleci-log](images/ci/circleci-log.png)
 
 ## Uso del gestor de tareas
-Se han añadido algunas entradas al [Makefile](../Makefile) para trabajar con docker de forma más sencilla ejecutando más facilmente los comandos más recurrentes, permitiendonos utilizar siempre el Taskfile para trabajar.
+Se han añadido algunas entradas al [Makefile](../Makefile) para trabajar con docker de forma más sencilla ejecutando más facilmente los comandos más recurrentes, permitiendonos utilizar el Taskfile, incluso en los entornos de los servicios CI.
 
 ```
 docker-test:
@@ -44,7 +44,8 @@ De este modo tambien se simplifican los ficheros de configuración de integracio
 Y en caso de querer hacer un cambio (por ejemplo el nombre o la version de la imagen), solo es necesario editar este fichero!
 
 ## Aprovechamiento del docker
-Tanto GithubAction como Circle CI, utilizan la misma imagen docker, especificada a través del Makefile.
+Tanto GithubAction como Circle CI, utilizan la misma imagen docker.
 
 ## Avance del proyecto
+- Se ha creado un metodo y su test. [Issue](https://github.com/morevi/GetItDone/issues/66)
 

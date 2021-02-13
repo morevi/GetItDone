@@ -32,3 +32,10 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/4)
 - Creado un Dockerfile
 - Creado el workflow para la realización de tests automaticos con github actions
 - Subida automática de contenedores a dockerhub.
+
+# Hito 4
+Su ![milestone](https://github.com/morevi/GetItDone/milestone/5)
+- Ejegidos CircleCI y Actions (aparte de Travis)
+- Creados ficheros de configuración para cada servicio.
+- Probados cada CI.
+- Añadidos al README badges con las que visualizar el estado del proyecto.
