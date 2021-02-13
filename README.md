@@ -1,5 +1,5 @@
 # GetItDone
-[![dbt](https://github.com/morevi/GetItDone/workflows/dbt/badge.svg)](https://github.com/morevi/GetItDone/actions?query=workflow%3Adbt)
+[![DBT](https://github.com/morevi/GetItDone/workflows/dbt/badge.svg)](https://github.com/morevi/GetItDone/actions?query=workflow%3Adbt)
 [![Travis](https://travis-ci.com/morevi/GetItDone.svg?branch=master)](https://travis-ci.com/morevi/GetItDone)
 [![CircleCI](https://circleci.com/gh/morevi/GetItDone.svg?style=svg)](https://app.circleci.com/pipelines/github/morevi/GetItDone?branch=circleci-project-setup)
 ## Descripción.
