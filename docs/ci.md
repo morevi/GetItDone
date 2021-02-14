@@ -6,10 +6,13 @@ Para los 3 sistemas de CI se utilizan badges para visualizar el estado del códi
 ## Actions
 Es difícil organizar varios servicios de CI de forma que se esperen unos a otros, así que el mismo sistema que construya la imagen de docker, tendrá que realizar una prueba de tests con ella, de forma que tengamos los resultados con la imagen actualizada, al menos de este CI.
 
-Se han configurado el workflow [docker-build-test](../github/workflows/docker-build-test.yml), que realiza 3 _jobs_:
+Se han configurado el workflow [dbt](../github/workflows/dbt.yml), que realiza 3 _jobs_:
 - `check`. Combrueba si han habido cambios en el Dockerfile
 - `build`. Si han habido cambios, reconstruye y sube la nueva imagen de docker; si no: no hace nada.
 - `test`. Espera a que acabe `build`, y ejecuta los tests en ese contenedor.
+![actions-log](images/ci/actions-log2.png)
+
+Podemos ver que se ejecutan:
 ![actions-log](images/ci/actions-log.png)
 
 ## Travis
