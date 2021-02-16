@@ -2,7 +2,7 @@ build:
 		go build -o getitdone cmd/getitdone/main.go
 
 test:
-		go test -cover ./...
+		CGO_ENABLED=0 go test -cover ./...
 
 build-test:
 		go test -c -cover ./cmd/getitdone
