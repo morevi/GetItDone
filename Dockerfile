@@ -2,7 +2,7 @@ FROM golang:1.15.7-alpine
 LABEL version="1.0.6" maintainer="morevi"
 
 WORKDIR /test
-RUN apk update && apk add --no-cache git make openssh tar gzip ca-certificates \
+RUN apk update && apk add --no-cache git make build-base openssh tar gzip ca-certificates \
   && addgroup -S go && adduser -S go -G go
 
 USER go
