@@ -47,6 +47,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       d.Add(p)
       res, _ := json.Marshal("201 Created")
       fmt.Fprintf(w, string(res))
+    } else {
+      res, _ := json.Marshal("500 Something happened")
+      fmt.Fprintf(w, string(res))
     }
   }
 }

@@ -7,9 +7,9 @@ import (
 
 // PROJECT
 type Project struct {
-  Tags []string
-  Description string
-  Items []Task
+  Tags []string `json:"Tags"`
+  Description string `json:"Description"`
+  Items []Task `json:"Items"`
 }
 
 func (p *Project) New(tags []string, desc string, todos []Task) {
