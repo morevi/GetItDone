@@ -1,0 +1,13 @@
+
+name: Deploy on Vercel
+on:
+  workflow_run:
+    - dbt
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy
+        run: curl -X POST ${{ VERCEL_DEPLOY_TRIGGER }}
