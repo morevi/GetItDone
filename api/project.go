@@ -1,7 +1,6 @@
 package handler
 
 import (
-  "log"
   "fmt"
   "net/http"
   "encoding/json"
@@ -29,15 +28,14 @@ func getFromDB() tareas.Dashboard {
 
 func Handler(w http.ResponseWriter, r *http.Request) {
   d := getFromDB()
-  log.Println(json.Marshal(d))
 
   switch r.Method{
   // Get every or some projects
   case "GET":
     tags, ok := r.URL.Query()["tags"]
-    if !ok || len(tags[0]) < 1{
+    if !ok {
       res, _ := json.Marshal(d.GetAll())
-      fmt.Fprintf(w, string(res))
+      fmt.Fprintf(w, string(res) + "GETALL")
     } else {
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
