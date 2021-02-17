@@ -45,7 +45,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
     err := json.NewDecoder(r.Body).Decode(&p)
     if err != nil {
       d.Add(p)
-      fmt.Fprintf(w, "201 Created")
+      res, _ := json.Marshal("201 Created")
+      fmt.Fprintf(w, string(res))
     }
   }
 }
