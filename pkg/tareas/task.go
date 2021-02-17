@@ -3,9 +3,9 @@ package tareas
 //Class TASK
 
 type Task struct {
-  Done bool
-  Content string
-  Due string
+  Done bool      `json:"Done"`
+  Content string `json:"Content"`
+  Due string     `json:"Due"`
 }
 
 func (t *Task) New(done bool, content string, due string) {

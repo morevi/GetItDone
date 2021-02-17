@@ -1,7 +1,6 @@
 package handler
 
 import (
-  "fmt"
   "net/http"
   "encoding/json"
   "io/ioutil"
@@ -29,36 +28,47 @@ func getFromDB() tareas.Dashboard {
 
 func Handler(w http.ResponseWriter, r *http.Request) {
   d := getFromDB()
+  var resultado []byte
 
   switch r.Method {
   // Get every or some projects
   case "GET":
     tags, ok := r.URL.Query()["tags"]
     if !ok {
-      res, _ := json.Marshal(d.GetAll())
-      fmt.Fprintf(w, string(res))
+      output, err := json.Marshal(d.GetAll())
+      if err != nil {
+        http.Error(w, err.Error(), 500)
+      }
+      resultado = output
     } else {
-      res, _ := json.Marshal(d.SearchByTags(tags))
-      fmt.Fprintf(w, string(res))
+      output, err := json.Marshal(d.SearchByTags(tags))
+      if err != nil {
+        http.Error(w, err.Error(), 500)
+      }
+      resultado = output
     }
 
   case "POST":
     body, err := ioutil.ReadAll(r.Body)
+    defer r.Body.Close()
+
     if err != nil {
-	     fmt.Fprint(w, err.Error(), 500)
+	     http.Error(w, err.Error(), 500)
 		    return
 	   }
 
     var p tareas.Project
     err = json.Unmarshal(body, &p)
     if err != nil {
-      d.Add(p)
-      res, _ := json.Marshal("201 Created")
-      fmt.Fprintf(w, string(res))
-    } else {
-      // res, _ := json.Marshal(err)
-      fmt.Fprintf(w, string(err))
+      http.Error(w, err.Error(), 500)
+      return
     }
+    d.Add(p)
+    output, _ := json.Marshal(201)
+    resultado = output
   }
+
+  w.Header().Set("content-type","application/json")
+  w.Write(resultado)
 }
 
