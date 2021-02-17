@@ -1,6 +1,7 @@
 package handler
 
 import (
+  "log"
   "fmt"
   "net/http"
   "encoding/json"
@@ -17,11 +18,11 @@ func getFromDB() tareas.Dashboard {
   var t tareas.Task
   t.New(true, "Hito 5", "2020-02-17")
 
-  var p tareas.Projecto
+  var p tareas.Project
   p.New([]string{"iv","serverless","despliegue"},
   "Hito 5 de la asignatura IV",
   []tareas.Task{t})
-  t.Add(p)
+  d.Add(p)
 
   return d
 }
@@ -37,8 +38,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       res, _ := json.Marshal(d.GetAll())
       fmt.Fprintf(w, string(res))
     } else {
-      key := keys[0]
-      log.Println("Url Param 'key' is: " + string(key))
+      log.Println("Url Param 'key' is: " + string(tags[0]))
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
     }
