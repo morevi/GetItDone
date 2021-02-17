@@ -23,8 +23,7 @@ func (d *Dashboard) Get(pos int) Project {
 
 // Get all projects
 func (d *Dashboard) GetAll() []Project {
-  var out []Project
-  return out
+  return d.Projects
 }
 
 // Get project searching for each tag separately
