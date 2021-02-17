@@ -29,7 +29,7 @@ func getFromDB() tareas.Dashboard {
 func Handler(w http.ResponseWriter, r *http.Request) {
   d := getFromDB()
 
-  switch r.Method{
+  switch r.Method {
   // Get every or some projects
   case "GET":
     tags, ok := r.URL.Query()["tags"]
@@ -39,6 +39,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
     } else {
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
+    }
+  case "POST":
+    var p tareas.Project
+    err := json.NewDecoder(r.Body).Decode(&p)
+    if err != nil {
+      d.Add(p)
+      fmt.Fprintf(w, "201 Created")
     }
   }
 }
