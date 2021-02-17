@@ -4,6 +4,7 @@ import (
   "fmt"
   "net/http"
   "encoding/json"
+  "io/ioutil"
   "github.com/morevi/GetItDone/pkg/tareas"
 )
 
@@ -42,14 +43,14 @@ func Handler(w http.ResponseWriter, r *http.Request) {
     }
 
   case "POST":
-    body, err := ioutil.ReadAll(r.body)
+    body, err := ioutil.ReadAll(r.Body)
     if err != nil {
 	     fmt.Fprint(w, err.Error(), 500)
 		    return
 	   }
 
     var p tareas.Project
-    err := json.Unmarshal(b, &p)
+    err = json.Unmarshal(body, &p)
     if err != nil {
       d.Add(p)
       res, _ := json.Marshal("201 Created")
