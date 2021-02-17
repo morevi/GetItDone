@@ -40,9 +40,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
     }
+
   case "POST":
+    body, err := ioutil.ReadAll(r.body)
+    if err != nil {
+	     fmt.Fprint(w, err.Error(), 500)
+		    return
+	   }
+
     var p tareas.Project
-    err := json.NewDecoder(r.Body).Decode(&p)
+    err := json.Unmarshal(b, &p)
     if err != nil {
       d.Add(p)
       res, _ := json.Marshal("201 Created")
