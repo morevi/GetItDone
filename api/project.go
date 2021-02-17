@@ -17,11 +17,19 @@ func getFromDB() tareas.Dashboard {
   var t tareas.Task
   t.New(true, "Hito 5", "2020-02-17")
 
+  // Proyecto de ejemplo 1
   var p tareas.Project
   p.New([]string{"iv","serverless","despliegue"},
   "Hito 5 de la asignatura IV",
   []tareas.Task{t})
   d.Add(p)
+
+  // Proyecto de ejemplo 2
+  var p2 tareas.Project
+  p2.New([]string{"iv"},
+  "ejemplo",
+  []tareas.Task{t})
+  d.Add(p2)
 
   return d
 }
