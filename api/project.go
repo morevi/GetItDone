@@ -35,7 +35,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
     tags, ok := r.URL.Query()["tags"]
     if !ok {
       res, _ := json.Marshal(d.GetAll())
-      fmt.Fprintf(w, string(res) + "GETALL")
+      fmt.Fprintf(w, string(res))
     } else {
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
