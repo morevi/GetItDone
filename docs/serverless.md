@@ -3,7 +3,7 @@
 ## Conexión con Vercel, Github, y despliegue
 Se ha enlazado la cuenta y el repositorio de Github con Vercel, de forma que Vercel comprueba si se han realizado _push_ en el repositorio, antes de hacer un despliegue.
 
-Para lograr que se realicen los tests antes que el despliegue, se ha creado desde Vercel un webhook, y se ha añadido como _secreto_ al repositorio en Github. Luego, se ha creado un nuevo _workflow_: [deploy-vercel.yml](../.github/workflows/deploy-vercel.yml). Este _workflow_ espera a que acaben los tests, y luego realiza una peticion _POST_ con _curl_ a la URL de la API de Vercel.
+Para lograr que se realicen los tests antes que el despliegue, se ha creado desde Vercel un webhook, y se ha añadido como _secreto_ al repositorio en Github. Luego, se ha creado un nuevo _workflow_: [deploy-vercel.yml](../.github/workflows/deploy-vercel.yml). Este _workflow_ espera a que acaben los tests ([dbt](../.github/workflows/dbt.yml)), y luego realiza una petición _POST_ con _curl_ a la URL de la API de Vercel, activando así el _build_ de Vercel.
 
 El despliegue se puede comprobar [aquí](https://getitdone.vercel.app/).
 
