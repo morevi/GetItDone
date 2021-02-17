@@ -26,7 +26,7 @@ func getFromDB() tareas.Dashboard {
 
   // Proyecto de ejemplo 2
   var p2 tareas.Project
-  p2.New([]string{"iv"},
+  p2.New([]string{"serverless"},
   "ejemplo",
   []tareas.Task{t})
   d.Add(p2)
