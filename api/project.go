@@ -9,8 +9,8 @@ import (
 )
 
 func getFromDB() tareas.Dashboard {
-  // El plan es que se cargue el dashboard desde una db,
-  // por ahora no está implementado, asi que se generan datos
+  // El plan es que se cargue el dashboard de usuario desde una db,
+  // pero por ahora no está implementado, asi que se generan datos
   // de ejemplo
   var d tareas.Dashboard
   d.New(91)
@@ -29,6 +29,7 @@ func getFromDB() tareas.Dashboard {
 
 func Handler(w http.ResponseWriter, r *http.Request) {
   d := getFromDB()
+  log.Println(json.Marshal(d))
 
   switch r.Method{
   // Get every or some projects
@@ -38,7 +39,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
       res, _ := json.Marshal(d.GetAll())
       fmt.Fprintf(w, string(res))
     } else {
-      log.Println("Url Param 'key' is: " + string(tags[0]))
       res, _ := json.Marshal(d.SearchByTags(tags))
       fmt.Fprintf(w, string(res))
     }
