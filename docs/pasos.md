@@ -39,3 +39,9 @@ Su ![milestone](https://github.com/morevi/GetItDone/milestone/5)
 - Creados ficheros de configuración para cada servicio.
 - Probados cada CI.
 - Añadidos al README badges con las que visualizar el estado del proyecto.
+
+# Hito 5
+Su ![milestone](https://github.com/morevi/GetItDone/milestone/6)
+- Preparado el despliegue automático en Vercel.
+- Creada una función serverless con 3 modos.
+

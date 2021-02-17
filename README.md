@@ -12,8 +12,8 @@ Puede ver como se ha llevado a cabo el despliegue desde Github [aquí](docs/serv
 Puedes leer sobre qué sistemas de ci, y cómo se han configurado [aquí](docs/ci.md)
 
 ## Pasos a realizar.
- - Continuar por la octava semana del curso.
- - Comenzar el enrutamiento de la api.
+ - Continuar por la semana número 10.
+ - Continuar el enrutamiento serverless creando más funciones y completando las HU.
  - Terminar una historia de usuario.
 
 ## Pasos realizados.
