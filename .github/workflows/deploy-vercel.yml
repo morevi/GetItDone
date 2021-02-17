@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deploy
-        run: curl -X POST ${{ VERCEL_DEPLOY_TRIGGER }}
+        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_TRIGGER }}
