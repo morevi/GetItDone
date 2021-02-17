@@ -2,7 +2,10 @@
 name: Deploy on Vercel
 on:
   workflow_run:
-    - dbt
+    workflows: ["dbt"]
+    branches: ["master"]
+    types:
+      - completed
 
 jobs:
   deploy:
